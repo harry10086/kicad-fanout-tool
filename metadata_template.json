@@ -3,31 +3,31 @@
     "name": "Fanout Tool",
     "description": "Automate escape routing (fanout) for dense IC packages like QFN, QFP, and BGA",
     "description_full": "A powerful Python-based plugin to automate escape routing (fanout) for dense IC packages like SOIC, QFN, QFP, and BGA in KiCad. It features advanced 3-segment routing algorithms, staggered alignments, and full parameter control to generate clean, DRC-error-free tracks and vias instantly.",
-    "identifier": "vn.thanhduongvs.fanout-tool",
+    "identifier": "com.github.harry10086.fanout-tool",
     "type": "plugin",
     "runtime": {
         "type": "python",
         "min_version": "3.10"
     },
     "author": {
-        "name": "Thanh Duong",
+        "name": "Thanh Duong (zh fork Harry)",
         "contact": {
-            "github": "https://github.com/thanhduongvs"
+            "github": "https://github.com/thanhduongvs/kicad-fanout-tool"
         }
     },
     "license": "MIT",
     "resources": {
-        "homepage": "https://github.com/thanhduongvs/kicad-fanout-tool"
+        "homepage": "https://github.com/harry10086/kicad-fanout-tool"
     },
     "versions": [
         {
             "version": "VERSION",
             "status": "stable",
-            "kicad_version": "9.0",
+            "kicad_version": "10.0",
             "runtime": "ipc",
             "download_sha256": "SHA256",
             "download_size": DOWNLOAD_SIZE,
-            "download_url": "https://raw.githubusercontent.com/thanhduongvs/kicad-fanout-tool/main/pcm/fanout-tool-VERSION.zip",
+            "download_url": "https://github.com/thanhduongvs/kicad-fanout-tool/releases/download/vVERSION/fanout-tool-VERSION.zip",
             "install_size": INSTALL_SIZE,
             "platforms": [
                 "linux",

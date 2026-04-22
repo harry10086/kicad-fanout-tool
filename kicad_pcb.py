@@ -26,9 +26,51 @@ class KiCadPCB:
         self.connected: bool = False
 
     def connect_kicad(self) -> Tuple[bool, str]:
+        if self.connected:
+            return True, "Already connected"
+            
         try:
+            # Let kipy handle token discovery automatically from sys.argv and environment
             self.kicad = KiCad()
             self.board = self.kicad.get_board()
+            
+            self.footprints = []
+            self.references = []
+            self.stackup = []
+            self.layers = []
+            
+            all_footprints = self.board.get_footprints()
+            for fp in all_footprints:
+                if hasattr(fp, 'definition') and fp.definition is not None:
+                    if len(fp.definition.pads) > 5:
+                        self.footprints.append(fp)
+            
+            self.footprints.sort(key=natural_sort_key)
+            self.references = [f.reference_field.text.value for f in self.footprints]
+
+            stackup = self.board.get_stackup()
+            for l in stackup.layers:
+                if BoardLayer.BL_F_Cu <= l.layer <= BoardLayer.BL_B_Cu:
+                    l_name = l.user_name if l.user_name else f"Layer {l.layer}"
+                    self.stackup.append(LayerMap(l_name, l.layer))
+            
+            self.stackup.sort(key=lambda x: x.id)
+            self.layers = [layer.name for layer in self.stackup]
+
+            self.connected = True
+            return True, "Connected to KiCad"
+            
+        except Exception as e:
+            import traceback
+            traceback.print_exc()
+            
+            self.connected = False
+            self.footprints = []
+            self.references = []
+            self.stackup = []
+            self.layers = []
+            return False, str(e)
+
             
             self.footprints = []
             self.references = []
